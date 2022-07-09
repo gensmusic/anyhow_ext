@@ -1,11 +1,12 @@
 [package]
 name = "anyhow_ext"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2018"
 authors = ["gensmusic <gensmusic@163.com>"]
 license = "MIT"
 description = "Extension of anynow"
 repository = "https://github.com/gensmusic/anyhow_ext.git"
+documentation = "https://docs.rs/anyhow_ext/latest"
 categories = ["error", "anyhow", "rust-patterns"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
