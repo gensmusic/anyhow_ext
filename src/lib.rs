@@ -1,3 +1,5 @@
+#![doc = include_str!("../README.md")]
+
 use core::convert::Infallible;
 use std::fmt::Display;
 use std::panic::Location;
@@ -15,6 +17,9 @@ pub trait Context<T, E> {
     where
         C: Display + Send + Sync + 'static,
         F: FnOnce() -> C;
+
+    /// like google map red dot, only record the location info without any context message.
+    fn dot(self) -> Result<T>;
 }
 
 impl<T, E> Context<T, E> for Result<T, E>
@@ -59,6 +64,21 @@ where
             )
         })
     }
+
+    #[inline]
+    #[track_caller]
+    fn dot(self) -> Result<T> {
+        let caller = Location::caller();
+        anyhow::Context::context(
+            self,
+            format!(
+                "at `{}@{}:{}`",
+                caller.file(),
+                caller.line(),
+                caller.column()
+            ),
+        )
+    }
 }
 
 impl<T> Context<T, Infallible> for Option<T>
@@ -101,5 +121,20 @@ where
                 caller.column(),
             )
         })
+    }
+
+    #[inline]
+    #[track_caller]
+    fn dot(self) -> Result<T> {
+        let caller = Location::caller();
+        anyhow::Context::context(
+            self,
+            format!(
+                "at `{}@{}:{}`",
+                caller.file(),
+                caller.line(),
+                caller.column()
+            ),
+        )
     }
 }
