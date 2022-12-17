@@ -1,6 +1,6 @@
 [package]
 name = "anyhow_ext"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2018"
 authors = ["gensmusic <gensmusic@163.com>"]
 license = "MIT"

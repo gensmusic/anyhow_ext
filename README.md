@@ -47,7 +47,7 @@ fn foo() -> Result<()> {
 }
 ```
 
-## How localtion info is displayed
+## How location info is displayed
 
 `println!("{}", err)` looks like
 
